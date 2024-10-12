@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
@@ -12,4 +16,29 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+input,
+textarea {
+  @apply border-4 border-slate-500 rounded-lg p-2 hover:bg-slate-200;
+}
+
+button {
+  @apply bg-slate-500 rounded-lg p-2 text-white hover:bg-slate-400;
+}
+
+footer {
+  bottom: 0;
+  position: absolute;
+  padding: 20px 0;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 2rem;
 }
