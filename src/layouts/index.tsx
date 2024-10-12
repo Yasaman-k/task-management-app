@@ -14,7 +14,7 @@ const RootLayout = () => {
                 <Outlet />
             </main>
             <footer>
-                copy@2024
+                © 2024 Task Manager
             </footer>
         </div>
     )
