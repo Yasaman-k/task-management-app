@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
@@ -7,7 +7,7 @@ import AppRoot from './app';
 
 const rootElement = document.getElementById('root')
 if (rootElement) {
-  const root = ReactDOM.createRoot(rootElement as HTMLDivElement);
+  const root = createRoot(rootElement as HTMLDivElement);
   root.render(
     <React.StrictMode>
       <BrowserRouter>
