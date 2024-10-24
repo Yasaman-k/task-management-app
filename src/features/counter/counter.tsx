@@ -17,10 +17,9 @@ const Counter = () => {
     const manageInputValue = (e: ChangeEvent<HTMLInputElement>) => {
         if (Number(e.target.value)) {
             setIncrementAmount(Number(e.target.value))
-        } else if (e.target.value === '') {
-            setIncrementAmount(0)
         } else {
-            alert('عدد وارد کن')
+            // clear the input field
+            e.target.value = '';
         }
     }
 
@@ -37,7 +36,7 @@ const Counter = () => {
             <button onClick={() => resetAll()}>reset</button>
 
             <hr />
-            <input type="text" value={incrementAmount} onChange={manageInputValue} />
+            <input type="tel" onChange={manageInputValue} />
             <button onClick={() => dispatch(incrementByAmount(incrementAmount))}>add Amount</button>
         </div>
     )
