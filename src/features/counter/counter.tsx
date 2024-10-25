@@ -7,19 +7,35 @@ import { ChangeEvent, useReducer, useState } from 'react'
 const Counter = () => {
     const count = useSelector((state: RootState) => state.counter.count)
     const dispatch = useDispatch()
-    // const [incrementAmount, setIncrementAmount] = useState<number>(0)
 
-    const incrementAmoundReducer = (state: number, action: number) => {
+    const incrementAmoundReducer = (state: number | string, action: string | number) => {
         return action
     }
-    const [incrementAmount, setIncrementAmount] = useReducer(incrementAmoundReducer, 0)
+    const [incrementAmount, setIncrementAmount] = useReducer(incrementAmoundReducer, '')
+
+    const convertPersianToEnNum = (num: string) => {
+        const persianNumbers = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+        if (!persianNumbers.includes(num)) return false
+        const englishNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        const persianIndex = persianNumbers.indexOf(num);
+        return (englishNumbers[persianIndex]);
+    }
 
     const manageInputValue = (e: ChangeEvent<HTMLInputElement>) => {
-        if (Number(e.target.value)) {
-            setIncrementAmount(Number(e.target.value))
-        } else {
-            // clear the input field
-            e.target.value = '';
+        const inputValue = e.target.value
+        const lastChar = inputValue.charAt(inputValue.length - 1)
+        // english number
+        if (!inputValue) {
+            setIncrementAmount('')
+        }
+        if (Number(inputValue)) {
+            setIncrementAmount(Number(inputValue))
+            return
+        }
+        // persian number exist
+        const englishNum = convertPersianToEnNum(lastChar)
+        if (englishNum) {
+            setIncrementAmount(Number(incrementAmount + englishNum))
         }
     }
 
@@ -36,7 +52,7 @@ const Counter = () => {
             <button onClick={() => resetAll()}>reset</button>
 
             <hr />
-            <input type="tel" onChange={manageInputValue} />
+            <input type="text" placeholder='قیمت به تومان' value={incrementAmount} onChange={manageInputValue} />
             <button onClick={() => dispatch(incrementByAmount(incrementAmount))}>add Amount</button>
         </div>
     )
